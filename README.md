@@ -4,10 +4,9 @@ fork自[L1aoXingyu/Deep-Learning-Project-Template](https://github.com/L1aoXingyu
 
 ## Requirements
 
-- [loguru](https://github.com/Delgan/loguru) (Python logging made stupidly simple)
-- [yacs](https://github.com/rbgirshick/yacs) (Yet Another Configuration System)
-- [PyTorch](https://pytorch.org/) (An open source deep learning platform)
-- [ignite](https://github.com/pytorch/ignite) (High-level library to help with training neural networks in PyTorch)（可选，也不是非要用）
+- [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs), request
+- [PyTorch](https://pytorch.org/) 
+- diffusers, datasets
 
 ## 说明
 

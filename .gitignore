@@ -11,7 +11,7 @@ __pycache__
 *__pycache__
 log/
 output/
-data/datasets/
+datasets/butterflies/
 
 # qt GUI file
 build
