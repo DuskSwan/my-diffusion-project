@@ -1,11 +1,9 @@
-# PyTorch 项目模板 自用
-
-fork自[L1aoXingyu/Deep-Learning-Project-Template](https://github.com/L1aoXingyu/Deep-Learning-Project-Template)
+# Diffusion
 
 ## Requirements
 
 - [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs), request
-- [PyTorch](https://pytorch.org/) 
+- [PyTorch](https://pytorch.org/)
 - diffusers, datasets
 
 ## 说明

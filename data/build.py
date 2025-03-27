@@ -1,30 +1,47 @@
 # encoding: utf-8
 
-from torch.utils import data
+import torch
+import torchvision
+from datasets import load_dataset
+from torchvision import transforms
+from PIL import Image
 
-from torchvision.datasets import MNIST
-from .transforms import build_transforms
+import sys
+sys.path.append('.')
+from utils import show_images
 
 
-def build_dataset(transforms, is_train=True):
-    datasets = MNIST(root='./', train=is_train, transform=transforms, download=True)
-    return datasets
+def make_data_loader():
+    dataset = load_dataset("datasets/smithsonian_butterflies_subset", split="train")
 
+    # We'll train on 32-pixel square images, but you can try larger sizes too
+    image_size = 32
+    # You can lower your batch size if you're running out of GPU memory
+    batch_size = 64
 
-def make_data_loader(cfg, is_train=True):
-    if is_train:
-        batch_size = cfg.SOLVER.IMS_PER_BATCH
-        shuffle = True
-    else:
-        batch_size = cfg.TEST.IMS_PER_BATCH
-        shuffle = False
-
-    transforms = build_transforms(cfg, is_train)
-    datasets = build_dataset(transforms, is_train)
-
-    num_workers = cfg.DATALOADER.NUM_WORKERS
-    data_loader = data.DataLoader(
-        datasets, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers
+    # Define data augmentations
+    preprocess = transforms.Compose(
+        [
+            transforms.Resize((image_size, image_size)),  # Resize
+            transforms.RandomHorizontalFlip(),  # Randomly flip (data augmentation)
+            transforms.ToTensor(),  # Convert to tensor (0, 1)
+            transforms.Normalize([0.5], [0.5]),  # Map to (-1, 1)
+        ]
     )
 
-    return data_loader
+    def transform(examples):
+        images = [preprocess(image.convert("RGB")) for image in examples["image"]]
+        return {"images": images}
+
+    dataset.set_transform(transform)
+
+    # Create a dataloader from the dataset to serve up the transformed images in batches
+    train_dataloader = torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    return train_dataloader
+
+if __name__ == '__main__':
+    train_dataloader = make_data_loader()
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    xb = next(iter(train_dataloader))["images"].to(device)[:8]
+    print("X shape:", xb.shape)
+    show_images(xb).resize((8 * 64, 64), resample=Image.NEAREST)
