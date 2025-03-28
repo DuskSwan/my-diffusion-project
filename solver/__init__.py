@@ -1,3 +1,3 @@
 # encoding: utf-8
 
-from .build import make_optimizer
+from .scheduler import make_optimizer
