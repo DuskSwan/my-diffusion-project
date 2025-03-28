@@ -9,7 +9,7 @@ from diffusers import DDPMScheduler
 from diffusers import DDPMPipeline
 
 from modeling import build_Unet
-from data.build import make_data_loader
+from data.butterflies import make_data_loader
 from utils import show_images
 
 def train(noise_scheduler):

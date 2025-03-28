@@ -10,14 +10,9 @@ import sys
 sys.path.append('.')
 from utils import show_images
 
+def make_data_loader(image_size, batch_size):
 
-def make_data_loader():
     dataset = load_dataset("datasets/smithsonian_butterflies_subset", split="train")
-
-    # We'll train on 32-pixel square images, but you can try larger sizes too
-    image_size = 32
-    # You can lower your batch size if you're running out of GPU memory
-    batch_size = 64
 
     # Define data augmentations
     preprocess = transforms.Compose(
