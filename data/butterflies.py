@@ -6,11 +6,9 @@ from datasets import load_dataset
 from torchvision import transforms
 from PIL import Image
 
-import sys
-sys.path.append('.')
 from utils import show_images
 
-def make_data_loader(image_size, batch_size):
+def butterflies_data_loader(image_size, batch_size):
 
     dataset = load_dataset("datasets/smithsonian_butterflies_subset", split="train")
 
@@ -35,7 +33,7 @@ def make_data_loader(image_size, batch_size):
     return train_dataloader
 
 if __name__ == '__main__':
-    train_dataloader = make_data_loader()
+    train_dataloader = butterflies_data_loader()
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     xb = next(iter(train_dataloader))["images"].to(device)[:8]
     print("X shape:", xb.shape)

@@ -9,18 +9,19 @@ from diffusers import DDPMScheduler
 from diffusers import DDPMPipeline
 
 from modeling import build_Unet
-from data.butterflies import make_data_loader
+# from data.butterflies import butterflies_data_loader
+from data import make_data_loader
 from utils import show_images
 
 def train(noise_scheduler):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = build_Unet(image_size=32, device=device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=4e-4)
-    train_dataloader = make_data_loader()
+    train_dataloader = make_data_loader(dataset_name='butterflies', image_size=32, batch_size=32)
 
     losses = []
 
-    for epoch in range(30):
+    for epoch in range(10):
         for step, batch in enumerate(train_dataloader):
             clean_images = batch["images"].to(device)
             noise = torch.randn(clean_images.shape).to(clean_images.device)

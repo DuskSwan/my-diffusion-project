@@ -6,6 +6,8 @@ from datasets import load_dataset
 import requests
 from pathlib import Path
 
+from .butterflies import butterflies_data_loader
+
 def download_butterflies_images():
     # 加载数据集
     dataset = load_dataset("datasets/smithsonian_butterflies_subset")
@@ -24,6 +26,12 @@ def download_butterflies_images():
         img_data = requests.get(img_url).content
         with open(img_path, 'wb') as handler:
             handler.write(img_data)
+
+def make_data_loader(dataset_name='', image_size=64, batch_size=32):
+    if dataset_name == 'butterflies':
+        return butterflies_data_loader(image_size, batch_size)
+
+    
 
 if __name__ == '__main__':
     download_butterflies_images()
