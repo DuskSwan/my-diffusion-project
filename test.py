@@ -1,6 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
+
 import torch
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
@@ -26,7 +29,7 @@ def train(noise_scheduler):
             clean_images = batch["images"].to(device)
             noise = torch.randn(clean_images.shape).to(clean_images.device)
             bs = clean_images.shape[0]
-            timesteps = torch.randint(0, noise_scheduler.num_train_timesteps, (bs,), device=clean_images.device).long()
+            timesteps = torch.randint(0, noise_scheduler.config.num_train_timesteps, (bs,), device=clean_images.device).long()
             noisy_images = noise_scheduler.add_noise(clean_images, noise, timesteps)
             noise_pred = model(noisy_images, timesteps, return_dict=False)[0]
             loss = F.mse_loss(noise_pred, noise)

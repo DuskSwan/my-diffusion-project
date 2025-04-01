@@ -8,9 +8,17 @@ from PIL import Image
 
 from utils import show_images
 
+class CustomTransform:
+    def __init__(self, preprocess):
+        self.preprocess = preprocess
+
+    def __call__(self, examples):
+        images = [self.preprocess(image.convert("RGB")) for image in examples["image"]]
+        return {"images": images}
+
 def butterflies_data_loader(image_size, batch_size):
 
-    dataset = load_dataset("datasets/smithsonian_butterflies_subset", split="train")
+    dataset = load_dataset("huggan/smithsonian_butterflies_subset", split="train")
 
     # Define data augmentations
     preprocess = transforms.Compose(
@@ -22,10 +30,7 @@ def butterflies_data_loader(image_size, batch_size):
         ]
     )
 
-    def transform(examples):
-        images = [preprocess(image.convert("RGB")) for image in examples["image"]]
-        return {"images": images}
-
+    transform = CustomTransform(preprocess)
     dataset.set_transform(transform)
 
     # Create a dataloader from the dataset to serve up the transformed images in batches
