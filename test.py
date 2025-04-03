@@ -1,9 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-import os
-os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
-
 import torch
 from torch.utils.data import DataLoader
 import torch.nn.functional as F
@@ -24,7 +21,7 @@ def train(noise_scheduler):
 
     losses = []
 
-    for epoch in range(10):
+    for epoch in range(2):
         for step, batch in enumerate(train_dataloader):
             clean_images = batch["images"].to(device)
             noise = torch.randn(clean_images.shape).to(clean_images.device)
