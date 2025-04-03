@@ -48,6 +48,6 @@
 
 ## hugging face 数据集使用
 
-在 https://huggingface.co/settings/tokens 获取hugging face的令牌，然后在终端通过huggingface-cli login来输入，之后才能使用数据和模型。
+在[hugging face](https://huggingface.co/settings/tokens)获取令牌，然后在终端通过huggingface-cli login来输入，之后才能使用数据和模型。
 
 read权限允许你访问公开的数据集、模型和其他资源，下载这些资源并进行使用。write权限除了具备read权限的所有功能外，还允许你上传自己的数据集、模型或文件到Hugging Face Hub，创建新的仓库或修改已有的仓库。

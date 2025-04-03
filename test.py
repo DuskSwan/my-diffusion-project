@@ -31,11 +31,8 @@ def main(cfg):
         with torch.no_grad():
             residual = model(sample, t).sample
         sample = noise_scheduler.step(residual, t, sample).prev_sample
-    img = show_images(sample)
-    plt.imshow(img)
-    plt.axis("off") 
-    plt.show()
-
+    show_images(sample)
+    
 
 if __name__ == '__main__':
     set_random_seed(cfg.SEED)
