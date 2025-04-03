@@ -22,18 +22,15 @@ _C.MODEL.STEPS = 1000
 # -----------------------------------------------------------------------------
 _C.DATA = CN()
 _C.DATA.SIZE_TRAIN = 32
+_C.DATA.NAME = 'cartoon'
 
-# -----------------------------------------------------------------------------
-# DataLoader
-# -----------------------------------------------------------------------------
-_C.DATALOADER = CN()
 
 # -----------------------------------------------------------------------------
 # TRAIN
 # -----------------------------------------------------------------------------
 _C.TRAIN = CN()
 _C.TRAIN.BATCH_SIZE = 32
-_C.TRAIN.MAX_EPOCH = 5
+_C.TRAIN.MAX_EPOCH = 2
 
 # -----------------------------------------------------------------------------
 # INFERENCE
@@ -47,27 +44,7 @@ _C.INFERENCE.DATA_PATH = r''
 # Solver
 # ---------------------------------------------------------------------------- #
 _C.SOLVER = CN()
-_C.SOLVER.OPTIMIZER_NAME = "SGD"
 
-_C.SOLVER.MAX_EPOCHS = 50
-
-_C.SOLVER.BASE_LR = 0.001
-_C.SOLVER.BIAS_LR_FACTOR = 2
-
-_C.SOLVER.MOMENTUM = 0.9
-
-_C.SOLVER.WEIGHT_DECAY = 0.0005
-_C.SOLVER.WEIGHT_DECAY_BIAS = 0
-
-_C.SOLVER.GAMMA = 0.1
-_C.SOLVER.STEPS = (30000,)
-
-_C.SOLVER.WARMUP_FACTOR = 1.0 / 3
-_C.SOLVER.WARMUP_ITERS = 500
-_C.SOLVER.WARMUP_METHOD = "linear"
-
-_C.SOLVER.CHECKPOINT_PERIOD = 10
-_C.SOLVER.LOG_PERIOD = 100
 
 # Number of images per batch
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will

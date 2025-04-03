@@ -13,11 +13,15 @@ The original dataset is available at: https://github.com/google/cartoonset
 '''
 
 class CartoonDataset(Dataset):
-    def __init__(self, image_dir, image_size=32, transform=None):
+    def __init__(self, image_dir, image_size=32, transform=None, max_images=None):
         self.image_dir = Path(image_dir)
         self.image_paths = list(self.image_dir.glob("*.png"))
+        if max_images is not None:
+            self.image_paths = self.image_paths[:max_images]
         self.image_size = image_size
         self.transform = transform
+
+        assert len(self.image_paths) > 0, f"No images found in {self.image_dir}. Please check the directory."
 
     def __len__(self):
         return len(self.image_paths)
@@ -42,6 +46,7 @@ def cartoon_data_loader(image_size=64, batch_size=32):
     
     # Create dataset
     dataset = CartoonDataset(image_dir=dir, image_size=image_size, transform=transform)
+    # dataset = CartoonDataset(image_dir=dir, image_size=image_size, transform=transform, max_images=1000)
     
     # Create DataLoader
     train_dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)

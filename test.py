@@ -15,7 +15,8 @@ from utils import show_images, set_random_seed, initiate_cfg
 
 def main(cfg):
     device = cfg.DEVICE
-    train_dataloader = make_data_loader(dataset_name='butterflies', image_size=32, batch_size=32)
+    train_dataloader = make_data_loader(dataset_name=cfg.DATA.NAME, image_size=64, batch_size=32)
+    
     model = build_Unet(image_size=32, device=device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=4e-4)
     noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule="squaredcos_cap_v2")

@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs), request
+- [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs), requests
 - [PyTorch](https://pytorch.org/)
 - diffusers, datasets
 
