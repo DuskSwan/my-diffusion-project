@@ -1,16 +1,6 @@
 from yacs.config import CfgNode as CN
 
 # -----------------------------------------------------------------------------
-# Convention about Training / Test specific parameters
-# -----------------------------------------------------------------------------
-# Whenever an argument can be either used for training or for testing, the
-# corresponding name will be post-fixed by a _TRAIN for a training parameter,
-# or _TEST for a test-specific parameter.
-# For example, the number of images during training will be
-# IMAGES_PER_BATCH_TRAIN, while the number of images for testing will be
-# IMAGES_PER_BATCH_TEST
-
-# -----------------------------------------------------------------------------
 # Config definition
 # -----------------------------------------------------------------------------
 
@@ -24,42 +14,26 @@ _C.DATA_TYPE = 'float'  # or double
 # -----------------------------------------------------------------------------
 
 _C.MODEL = CN()
-_C.MODEL.NUM_CLASSES = 10
+_C.MODEL.NAME = "Unet"  # Model name
+_C.MODEL.STEPS = 1000
 
 # -----------------------------------------------------------------------------
-# INPUT
+# DATA
 # -----------------------------------------------------------------------------
-_C.INPUT = CN()
-# Size of the image during training
-_C.INPUT.SIZE_TRAIN = 32
-# Size of the image during test
-_C.INPUT.SIZE_TEST = 32
-# Minimum scale for the image during training
-_C.INPUT.MIN_SCALE_TRAIN = 0.5
-# Maximum scale for the image during test
-_C.INPUT.MAX_SCALE_TRAIN = 1.2
-# Random probability for image horizontal flip
-_C.INPUT.PROB = 0.5
-# Values to be used for image normalization
-_C.INPUT.PIXEL_MEAN = [0.1307, ]
-# Values to be used for image normalization
-_C.INPUT.PIXEL_STD = [0.3081, ]
+_C.DATA = CN()
+_C.DATA.SIZE_TRAIN = 32
 
 # -----------------------------------------------------------------------------
 # DataLoader
 # -----------------------------------------------------------------------------
 _C.DATALOADER = CN()
-# Number of data loading threads
-_C.DATALOADER.NUM_WORKERS = 0
 
 # -----------------------------------------------------------------------------
 # TRAIN
 # -----------------------------------------------------------------------------
 _C.TRAIN = CN()
 _C.TRAIN.BATCH_SIZE = 32
-_C.TRAIN.CHECKPOINT_PERIOD = 10
-_C.TRAIN.NEED_CHRCKPOINT = False
-_C.TRAIN.DATA_PATH = r''
+_C.TRAIN.MAX_EPOCH = 5
 
 # -----------------------------------------------------------------------------
 # INFERENCE
