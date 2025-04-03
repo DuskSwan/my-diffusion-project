@@ -11,7 +11,7 @@ def do_train(model, device, noise_scheduler, train_dataloader, optimizer, max_ep
     losses = []
     for epoch in range(max_epoch):
         for step, batch in enumerate(train_dataloader):
-            clean_images = batch["images"].to(device)
+            clean_images = batch.to(device)
             noise = torch.randn(clean_images.shape).to(clean_images.device)
             bs = clean_images.shape[0]
             timesteps = torch.randint(0, noise_scheduler.config.num_train_timesteps, (bs,), device=clean_images.device).long()
@@ -23,7 +23,7 @@ def do_train(model, device, noise_scheduler, train_dataloader, optimizer, max_ep
             optimizer.step()
             optimizer.zero_grad()
 
-        if (epoch + 1) % 5 == 0:
+        if (epoch + 1) % 1 == 0:
             loss_last_epoch = sum(losses[-len(train_dataloader):]) / len(train_dataloader)
             print(f"Epoch:{epoch+1}, loss: {loss_last_epoch}")
 
