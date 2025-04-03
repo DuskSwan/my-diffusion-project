@@ -12,6 +12,8 @@ __pycache__
 log/
 output/
 
+# datasets ignore
+dataset/cartoonset10k
 
 # qt GUI file
 build
