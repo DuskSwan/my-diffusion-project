@@ -15,13 +15,15 @@ from utils import show_images, set_random_seed, initiate_cfg
 
 def main(cfg):
     device = cfg.DEVICE
-    train_dataloader = make_data_loader(dataset_name=cfg.DATA.NAME, image_size=64, batch_size=32)
+    train_dataloader = make_data_loader(dataset_name=cfg.DATA.NAME, 
+                                        image_size=cfg.DATA.SIZE, 
+                                        batch_size=cfg.TRAIN.BATCH_SIZE)
     
-    model = build_Unet(image_size=32, device=device)
-    optimizer = torch.optim.AdamW(model.parameters(), lr=4e-4)
+    model = build_Unet(image_size=cfg.DATA.SIZE, device=device)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.SOLVER.BASE_LR)
     noise_scheduler = DDPMScheduler(num_train_timesteps=1000, beta_schedule="squaredcos_cap_v2")
     
-    do_train(model, device, noise_scheduler, train_dataloader, optimizer, max_epoch=cfg.TRAIN.MAX_EPOCH)
+    do_train(model, device, noise_scheduler, train_dataloader,max_epoch=cfg.TRAIN.MAX_EPOCH)
     
     # image_pipe = DDPMPipeline(unet=model, scheduler=noise_scheduler)
     # pipeline_output = image_pipe()
@@ -33,8 +35,16 @@ def main(cfg):
             residual = model(sample, t).sample
         sample = noise_scheduler.step(residual, t, sample).prev_sample
     show_images(sample)
-    
+
+def test():
+    # Test the model with a sample input
+    model = build_Unet(image_size=32, device='cuda')
+    sample_input = torch.randn(1, 3, 32, 32).to('cuda')
+    noise_scheduler = DDPMScheduler(num_train_timesteps=10, beta_schedule="squaredcos_cap_v2")
+    output = model(sample_input, noise_scheduler.timesteps[0])
+    print("Model output shape:", output.shape)
 
 if __name__ == '__main__':
     set_random_seed(cfg.SEED)
     main(cfg)
+    # test( )

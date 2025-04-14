@@ -4,7 +4,7 @@ from diffusers import UNet2DModel
 # from .example_model import ResNet18
 
 
-def build_Unet(image_size, device):
+def build_Unet(image_size, device='cuda'):
     # Create a model
     model = UNet2DModel(
         sample_size=image_size,  # the target image resolution

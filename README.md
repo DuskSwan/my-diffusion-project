@@ -2,9 +2,10 @@
 
 ## Requirements
 
-- [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs), requests
-- [PyTorch](https://pytorch.org/)
-- diffusers, datasets
+- python=3.9
+- [loguru](https://github.com/Delgan/loguru), [yacs](https://github.com/rbgirshick/yacs)
+- [PyTorch](https://pytorch.org/), lightning
+- [diffusers](https://huggingface.co/docs/diffusers/installation), datasets, flax
 
 ## 说明
 

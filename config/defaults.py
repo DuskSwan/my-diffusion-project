@@ -21,9 +21,8 @@ _C.MODEL.STEPS = 1000
 # DATA
 # -----------------------------------------------------------------------------
 _C.DATA = CN()
-_C.DATA.SIZE_TRAIN = 32
+_C.DATA.SIZE = 32
 _C.DATA.NAME = 'cartoon'
-
 
 # -----------------------------------------------------------------------------
 # TRAIN
@@ -44,7 +43,7 @@ _C.INFERENCE.DATA_PATH = r''
 # Solver
 # ---------------------------------------------------------------------------- #
 _C.SOLVER = CN()
-
+_C.SOLVER.BASE_LR = 0.001  # Base learning rate
 
 # Number of images per batch
 # This is global, so if we have 8 GPUs and IMS_PER_BATCH = 16, each GPU will
