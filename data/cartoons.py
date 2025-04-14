@@ -35,7 +35,7 @@ class CartoonDataset(Dataset):
 
 def cartoon_data_loader(image_size=64, batch_size=32):
     # Directory containing your images
-    dir = Path("datasets/cartoonset10k")
+    dir = Path("img_datasets/cartoonset10k")
     
     # Define transformations: resizing and normalization
     transform = transforms.Compose([

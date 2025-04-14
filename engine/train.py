@@ -63,7 +63,7 @@ def do_train(model, device, noise_scheduler, train_dataloader, max_epoch=50, lr=
     lightning_model = DiffusionLightning(model, noise_scheduler, lr)
     
     # 根据当前环境选择是否使用 GPU
-    trainer = pl.Trainer(max_epochs=max_epoch)
+    trainer = pl.Trainer(max_epochs=max_epoch, accelerator=device)
     trainer.fit(lightning_model, train_dataloader)
     
     return model

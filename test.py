@@ -30,6 +30,8 @@ def main(cfg):
     # generated_image = pipeline_output.images[0]
 
     sample = torch.randn(8, 3, 32, 32).to(device)
+    model.to(device)
+    noise_scheduler.set_timesteps(10)
     for i, t in enumerate(noise_scheduler.timesteps):
         with torch.no_grad():
             residual = model(sample, t).sample

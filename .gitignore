@@ -18,7 +18,7 @@ dataset/cartoonset10k
 # qt GUI file
 build
 dist
-datasets/cartoonset10k/*
+img_datasets/cartoonset10k/*
 
 # lightning ignore
 lightning_logs/
