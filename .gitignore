@@ -19,6 +19,7 @@ dataset/cartoonset10k
 build
 dist
 img_datasets/cartoonset10k/*
+img_datasets/smithsonian_butterflies_subset/*
 
 # lightning ignore
 lightning_logs/
